@@ -1,7 +1,5 @@
-import 'package:clima/services/networking.dart';
 import 'package:clima/services/weather.dart';
 import 'package:flutter/material.dart';
-import '../utilities/location.dart';
 
 import 'location_screen.dart';
 
