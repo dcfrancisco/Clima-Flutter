@@ -63,8 +63,6 @@ class WeatherModel {
     NetworkHelper networkHelper = NetworkHelper(url);
     var weatherData = await networkHelper.getData();
 
-    print('Got city weather data');
-    print(cityName);
     return weatherData;
   }
 }

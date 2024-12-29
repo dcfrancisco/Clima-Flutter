@@ -80,8 +80,11 @@ class _LocationScreenState extends State<LocationScreen> {
                           MaterialPageRoute(builder: (context) {
                         return CityScreen();
                       }));
-                      var weatherData = await weather.getCityWeather(typedName);
-                      updateUI(weatherData);
+                      if (typedName != null && typedName.isNotEmpty) {
+                        var weatherData =
+                            await weather.getCityWeather(typedName);
+                        updateUI(weatherData);
+                      }
                     },
                     child: Icon(
                       Icons.location_city,
