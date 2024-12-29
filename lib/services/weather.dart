@@ -1,4 +1,25 @@
+import '../utilities/location.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'networking.dart';
+
 class WeatherModel {
+  Future<dynamic> getLocationWeather() async {
+    Location location = Location();
+
+    // Get the location data
+    await location.getLocation();
+
+    String apiKey = dotenv.env['OPENWEATHER_API_KEY'] ?? '';
+    String url = dotenv.env['OPENWEATHER_API_URL'] ?? '';
+    url = url +
+        '&lat=${location.latitude}&lon=${location.longitude}&exclude=daily,hourly,minutely&appid=$apiKey&units=metric';
+
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
@@ -29,5 +50,9 @@ class WeatherModel {
     } else {
       return 'Bring a 🧥 just in case';
     }
+  }
+
+  void getWeatherData() {
+    print('Got weather data');
   }
 }
